@@ -42,6 +42,12 @@ Definimos unas constantes para así hacer más fácil la codificación además d
 * [MPLAB X IDE v5.25](https://www.microchip.com/mplab/mplab-x-ide)
 * [MPLAB XC8 C compiler v2.10](https://www.microchip.com/mplab/compilers)
 
+## Codigo
+
+
+  if (isAwesome){
+      return true
+    }
 
 ## Instrucciones para usar la plantilla
 * Haga click sobre la opción 'use this template' en la parte superior del repositorio.
