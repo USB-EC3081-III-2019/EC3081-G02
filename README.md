@@ -2,8 +2,8 @@
 Este repositorio es una plantilla para ser usada en la materia ECXXXX. Modifique el contenido de esta plantilla para adaptarlo a su proyecto manteniendo la estructura de carpetas que se explica en [Estructura del repositorio](#Estructura-del-repositorio).
 
 ## Integrantes del equipo
-* 02-34759 Novel Antonio Certad Hernández
-* 11-55555 Alan Brito Delgado
+* 14-05775 Enmanuel Gerardo Alfonzo Angulo
+* 15-11592 Víctor García 
 
 ## Estructura del repositorio
 ### docs/
