@@ -44,10 +44,11 @@ Definimos unas constantes para así hacer más fácil la codificación además d
 
 ## Codigo
 
-`< if (isAwesome){
-      return true
-    }
->`
+```
+if (isAwesome){
+  return true
+}
+```
 
 ## Instrucciones para usar la plantilla
 * Haga click sobre la opción 'use this template' en la parte superior del repositorio.
