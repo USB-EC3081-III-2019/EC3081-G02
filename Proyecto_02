@@ -1,0 +1,26 @@
+# <Configuración de la LCD>
+Realizamos las especificaciones que nos indicaba el fabricante para poder configurar la LCD para mostrar un mensaje en nuestro caso el mensaje fue hola 
+## Integrantes del equipo
+* 14-05775 Enmanuel Gerardo Alfonzo Angulo
+* 15-11592 Víctor García 
+
+## Estructura del repositorio
+### Material de apoyo 
+El fabricante nos da información que nos facilito bastante la configuración en la cual pudimos ver como mandar comandos y caracteres que este se indica con RS. Los comandos para leer y escribir entres otras funciones que se nos indica en el material 
+
+### firmware/
+En la carpeta firmware/ deben colocarse los archivos relevantes del código que debe ejecutarse en el microcontrolador. Si el IDE utilizado para el desarrollo del firmware genera un árbol de carpetas asociadas al proyecto, incluya todos los directorios necesarios. Procure solo incluir los archivos y directorios necesarios para compilar correctamente el firmware y no incluya los archivos intermedios que se generan durante la compilación. 
+#### Caso MPLAB
+
+
+#### Caso CODEWARRIOR
+
+### Software/
+En el caso de que el proyecto incluya desarrollo de software para PC (MATLAB, Python, LabVIEW, etc) el código/proyecto respectivo debe ir dentro de este directorio.
+
+## Instrucciones para usar la plantilla
+* Haga click sobre la opción 'use this template' en la parte superior del repositorio.
+* Aparecera la ventana para crear un repositorio basado en esta plantilla.
+* Debe crear el repositorio dentro de la organización correspondiente a la materia y no dentro de su cuenta personal de GitHub.
+* El nombre del repositorio debe ser ECXXXX-GXX.
+* Edite el README.md de su repositorio según los datos de su materia y grupo.
