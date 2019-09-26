@@ -146,4 +146,5 @@ void PIC_Configuracion_Inicial(){
 ```
 
 ## Resultados 
-![IMG_20190924_150553](C:\Users\Cachapa\Downloads)
+![IMG_20190924_150553](https://user-images.githubusercontent.com/53823068/65649982-cc97b300-dfd6-11e9-9d7e-bb8d464cbe1a.jpg)
+
