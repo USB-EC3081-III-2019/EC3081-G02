@@ -44,7 +44,7 @@ Definimos unas constantes para así hacer más fácil la codificación además d
 
 ## Codigo
 
-```
+```c
 #include <xc.h>
 // CONFIG
 #pragma config FOSC = XT        // Oscillator Selection bits (XT oscillator)
