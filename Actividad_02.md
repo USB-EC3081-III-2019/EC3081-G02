@@ -19,8 +19,20 @@ lo que se traduce a nuestro código como
 ![conf_led](https://user-images.githubusercontent.com/53823068/65627992-86266200-df9e-11e9-8984-8e183ad6bd58.png)
 
 Claro que otros aspectos debemos declarar varias funciones que nos permita ver el mensaje en pantalla además de todas las configuraciones que debe tener previamente el PIC como por ejemplo el oscilador de 4MHz.
+```c
+// CONFIG
+#pragma config FOSC = XT        // Oscillator Selection bits (XT oscillator)
+#pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled)
+#pragma config PWRTE = OFF      // Power-up Timer Enable bit (PWRT disabled)
+#pragma config CP = OFF         // FLASH Program Memory Code Protection bits (Code protection off)
+#pragma config BOREN = OFF      // Brown-out Reset Enable bit (BOR disabled)
+#pragma config LVP = OFF        // Low Voltage In-Circuit Serial Programming Enable bit (RB3 is digital I/O, HV on MCLR must be used for programming)
+#pragma config CPD = OFF        // Data EE Memory Code Protection (Code Protection off)
+#pragma config WRT = ON          // FLASH Program Memory Write Enable (Unprotected program memory may be written to by EECON control)
 
-![conf_pic01](https://user-images.githubusercontent.com/53823068/65629167-e28a8100-dfa0-11e9-9faa-93c128217bac.png)
+# define _XTAL_FREQ 4000000
+
+```
 
 Definimos unas constantes para así hacer más fácil la codificación además de ser mejor para futuras modificaciones.
 ## Funciones 
