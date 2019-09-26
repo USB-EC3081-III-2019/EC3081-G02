@@ -25,15 +25,77 @@ Claro que otros aspectos debemos declarar varias funciones que nos permita ver e
 Definimos unas constantes para así hacer más fácil la codificación además de ser mejor para futuras modificaciones.
 ## Funciones 
 ### LCD_Escribir
-![escribir](https://user-images.githubusercontent.com/53823068/65629603-a146a100-dfa1-11e9-8b60-ce76c3d261f8.png)
+```c
+void LCD_Escribir(char dato){
+    LCD_RS = 1;
+    LCD_DATO = dato;
+    LCD_E = 1;
+    LCD_E = 0;
+    __delay_us(40);//función del delay
+}
+
+```
+
 
 ### LCD_Comando
-![comando](https://user-images.githubusercontent.com/53823068/65629775-03070b00-dfa2-11e9-9668-5b03e24efb8b.png)
-
+```c
+void LCD_Comando(char dato){
+    LCD_RS = 0;
+    LCD_DATO = dato;
+    LCD_E = 1;
+    LCD_E = 0;
+    if(dato <= 3){
+      __delay_ms(2);
+    }else{
+      __delay_us(40);
+    }
+}
+```
 ### PIC_Configuracion_Inicial
-![Pic_confi](https://user-images.githubusercontent.com/53823068/65629923-609b5780-dfa2-11e9-8166-88569f7a0c25.png)
+```c
+void PIC_Configuracion_Inicial(){
+    TRISD = 0;
+    TRISCbits.TRISC0 = 0;
+    TRISCbits.TRISC1 = 0;
+   
+    TRISA = 0;
+    ADCON0=0b00000000; //Configuracion del registro ADCON0
+   
+   
+     /*INICIALIZACIÓN DE INTERRUPCIONES*/
+    INTCON = 0;//limpieza del registro INTCON
+    INTCONbits.GIE = 0;//Habilitacion de interrupciones
+   
+}
+
+```
 ### Main
-![main](https://user-images.githubusercontent.com/53823068/65630142-cdaeed00-dfa2-11e9-951e-405b27dbfa0f.png)
+
+```c
+void main() {
+    PIC_Configuracion_Inicial();
+    LCD_Configuracion_Inicial();
+    LCD_Escribir('h');
+    LCD_Escribir('o');
+    LCD_Escribir('l');
+    LCD_Escribir('a');
+   
+    while(1){
+        __delay_ms(500);
+        PORTAbits.RA0 = 1;
+        __delay_ms(500);        
+        PORTAbits.RA0 = 0;
+   
+   
+    };
+   
+   
+
+
+
+}
+
+```
 ### firmware/
 * LCD.c https://github.com/USB-EC3081-III-2019/EC3081-G02.md/blob/master/firmware/LCD.c
 
