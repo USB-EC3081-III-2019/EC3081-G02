@@ -3,7 +3,7 @@ Este repositorio es una plantilla para ser usada en la materia ECXXXX. Modifique
 
 ## Integrantes del equipo
 * 14-05775 Enmanuel Gerardo Alfonzo Angulo
-* 15-11592 Víctor García 
+* 15-11592 Víctor Manuel García Martínez 
 
 ## Estructura del repositorio
 ### docs/
