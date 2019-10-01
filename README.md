@@ -1,5 +1,5 @@
-# <Título del Repositorio>
-Este repositorio es una plantilla para ser usada en la materia ECXXXX. Modifique el contenido de esta plantilla para adaptarlo a su proyecto manteniendo la estructura de carpetas que se explica en [Estructura del repositorio](#Estructura-del-repositorio).
+# <SmartVite>
+  El proyecto consiste en realizar un hervidero inteligente con los principios de la domótica ya que se planea hacer uso de un servomodor para el control de persianas y un relé el cual activará las luminarias según sea requerido, de esta manera, las plantas contarias con un proceso de fotosintesis mucho mayor.
 
 ## Integrantes del equipo
 * 14-05775 Enmanuel Gerardo Alfonzo Angulo
