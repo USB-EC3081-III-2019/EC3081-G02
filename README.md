@@ -17,11 +17,3 @@ En la carpeta firmware/ deben colocarse los archivos relevantes del código que 
 
 ### Software/
 En el caso de que el proyecto incluya desarrollo de software para PC (MATLAB, Python, LabVIEW, etc) el código/proyecto respectivo debe ir dentro de este directorio.
-
-## Instrucciones para usar la plantilla
-* Haga click sobre la opción 'use this template' en la parte superior del repositorio.
-* Aparecera la ventana para crear un repositorio basado en esta plantilla.
-* Debe crear el repositorio dentro de la organización correspondiente a la materia y no dentro de su cuenta personal de GitHub.
-* El nombre del repositorio debe ser ECXXXX-GXX.
-* Edite el README.md de su repositorio según los datos de su materia y grupo.
-
