@@ -6,8 +6,9 @@
 * 15-11592 Víctor Manuel García Martínez 
 
 ## Estructura del repositorio
-### docs/
-En la carpeta docs/ se colocan todos los archivos de soporte que necesite para la documentación del proyecto: .pdf, imágenes, documentos, etc. También todas las imagenes o resultados que vayan a utilizarse como adjuntos en la WIKI. La estructura interna de la carpeta docs/ puede contener tantos directorios como ustedes lo requieran.
+### documentos:
+En el repositorio, se encontrará el archivo referente a servomotor en el cual se explica que es, como configurarlo y descripciones físicas.
+
 ### firmware/
 En la carpeta firmware/ deben colocarse los archivos relevantes del código que debe ejecutarse en el microcontrolador. Si el IDE utilizado para el desarrollo del firmware genera un árbol de carpetas asociadas al proyecto, incluya todos los directorios necesarios. Procure solo incluir los archivos y directorios necesarios para compilar correctamente el firmware y no incluya los archivos intermedios que se generan durante la compilación. 
 #### Caso MPLAB
