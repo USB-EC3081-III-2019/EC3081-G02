@@ -1,4 +1,4 @@
-# <SmartVite>
+## SmartVite
   El proyecto consiste en realizar un hervidero inteligente con los principios de la domótica ya que se planea hacer uso de un servomodor para el control de persianas y un relé el cual activará las luminarias según sea requerido, de esta manera, las plantas contarias con un proceso de fotosintesis mucho mayor.
 
 ## Integrantes del equipo
