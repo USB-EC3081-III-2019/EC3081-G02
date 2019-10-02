@@ -17,6 +17,7 @@
     2.  Servomotor
 ### documentos:
 En el repositorio, se encontrarán los siguientes archivos:
+
     1.  documento de [servomotor](https://github.com/USB-EC3081-III-2019/EC3081-G02/blob/master/docs/Servomotores.docx) en el cual se explica que es, como configurarlo y descripciones físicas.
     2. Guia principios para la [Domótica](https://github.com/USB-EC3081-III-2019/EC3081-G02/blob/master/docs/Dom%C3%B3tica%20luces.pdf), en el cual se tocan temas como lo es la luminaria crepuscular o la configuración PWM en un pic a través de los pines CCPX. Dicho documento se obtuvo de la [fuente](https://www.neoteo.com/rs485-domotica-al-alcance-de-tu-mano-15810)
     
