@@ -8,7 +8,7 @@
 ## Estructura del repositorio
 ### documentos:
 En el repositorio, se encontrará el archivo referente a servomotor en el cual se explica que es, como configurarlo y descripciones físicas.
-Adicionalmente, estará un archivo referente a sugerencias de principios para la Domótica, en el cual se tocan temas como lo es la luminaria crepuscular o la configuración PWM en un pic a través de los pines CCPX. Dicho documento se obtuvo de la siguiente fuente: https://www.neoteo.com/rs485-domotica-al-alcance-de-tu-mano-15810
+Adicionalmente, estará un archivo referente a sugerencias de principios para la Domótica, en el cual se tocan temas como lo es la luminaria crepuscular o la configuración PWM en un pic a través de los pines CCPX. Dicho documento se obtuvo de la [fuente](https://www.neoteo.com/rs485-domotica-al-alcance-de-tu-mano-15810)
 
 ### firmware/
 En la carpeta firmware/ deben colocarse los archivos relevantes del código que debe ejecutarse en el microcontrolador. Si el IDE utilizado para el desarrollo del firmware genera un árbol de carpetas asociadas al proyecto, incluya todos los directorios necesarios. Procure solo incluir los archivos y directorios necesarios para compilar correctamente el firmware y no incluya los archivos intermedios que se generan durante la compilación. 
