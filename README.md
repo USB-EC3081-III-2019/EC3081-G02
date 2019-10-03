@@ -10,7 +10,7 @@
 ### Sensores:
     1.  DHT11
     2.  Fotocelda
-    3.  por definir
+    3.  Proximidad por infrarrojo. 
     
 ### Actuadores:
     1.  Relé
@@ -24,6 +24,10 @@ En el repositorio, se encontrarán los siguientes archivos:
     3.  DataSheet del relé a usar y circuito tentativo a usar.
     4.  Datasheet de la Fotocelda y circuito tentativo a usar.
    
+### Propuesta de Proyecto:
+El proyecto será un invernadero inteligente el cual controlará la Irradiación dentro del mismo. De esta manera, las plantas podrán contar con una fotosintesis (Es el proceso biológico en el que las plantas capturan la energía de la luz solar para fabricar su propio alimento y liberar oxígeno a partir del dióxido de carbono y el agua) mayor, de manera que se cuente con un crecimiento más eficiente.
+
+
 ### firmware/
 En la carpeta firmware/ deben colocarse los archivos relevantes del código que debe ejecutarse en el microcontrolador. Si el IDE utilizado para el desarrollo del firmware genera un árbol de carpetas asociadas al proyecto, incluya todos los directorios necesarios. Procure solo incluir los archivos y directorios necesarios para compilar correctamente el firmware y no incluya los archivos intermedios que se generan durante la compilación. 
 #### Caso MPLAB
