@@ -16,11 +16,14 @@ El sensor DHT11 es capaz de realizar mediciones de temperatura y humedad relativ
     
 #2. [FotoResistencia](https://github.com/USB-EC3081-III-2019/EC3081-G02/blob/master/docs/Datasheet%20LDR.pdf):
 
-Un fotorresistor o fotorresistencia es un componente electrónico cuya resistencia disminuye con el aumento de intensidad de luz incidente.Su funcionamiento se basa en el efecto fotoeléctrico. Un fotorresistor está hecho de un semiconductor de alta resistencia como el sulfuro de cadmio, CdS.2​ Si la luz que incide en el dispositivo es de alta frecuencia, los fotones son absorbidos por las elasticidades del semiconductor dando a los electrones la suficiente energía para saltar la banda de conducción. El electrón libre que resulta, y su hueco asociado, conducen la electricidad, de tal modo que disminuye la resistencia.
+Un fotorresistor o fotorresistencia es un componente electrónico cuya resistencia disminuye con el aumento de intensidad de luz incidente.Su funcionamiento se basa en el efecto fotoeléctrico. Un fotorresistor está hecho de un semiconductor de alta resistencia como el sulfuro de cadmio, CdS.2 Si la luz que incide en el dispositivo es de alta frecuencia, los fotones son absorbidos por las elasticidades del semiconductor dando a los electrones la suficiente energía para saltar la banda de conducción. El electrón libre que resulta, y su hueco asociado, conducen la electricidad, de tal modo que disminuye la resistencia.
 
 ![Imagen de foto-resistencia](https://github.com/USB-EC3081-III-2019/EC3081-G02/blob/master/Imagenes/foto-resistencia.jpg)
 
-#3. HC-SR501(Sensor de proximidad):
+
+
+#3 [HC-SR501](https://github.com/USB-EC3081-III-2019/EC3081-G02/blob/master/docs/MANUAL-DEL-USUARIO-SENSOR-DE-MOVIMIENTO-PIR-HC-SR501.pdf):
+
 El sensor HC-SR501 se basa en un sensor piroeléctrico dividido en dos zonas sensibles. Estas dos zonas sensibles en condiciones normales son activadas igualmente por la radiación infrarroja del ambiente, pero emiten una señal cuando una de ellas se encuentra en diferencia con la otra (porque, por ejemplo, en una zona se encuentre una persona). La detección se basa en el calor emitido por el cuerpo humano, en forma de radiación infrarroja. Las zonas de detección intercaladas además se multiplican mediante una lente especial que se encuentra encima del sensor piroeléctrico (esa cosa blanca en forma de cúpula).
 
 ![Imagen de sensor de proximidad HC-SR501](https://github.com/USB-EC3081-III-2019/EC3081-G02/blob/master/Imagenes/sensor%20de%20proximidad%20HC-SR501.jpg)
