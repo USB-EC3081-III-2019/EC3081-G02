@@ -50,5 +50,6 @@ El proyecto será un invernadero inteligente el cual controlará la Irradiación
 
 #### Diagrama de flujo (sujeto a posibles modificaciones):
 
-![Imagen de diagrama de flujo](https://github.com/USB-EC3081-III-2019/EC3081-G02/blob/master/Imagenes/diagrama%20de%20flujo.png)
 
+![Imagen de diagrama de flujo](https://github.com/USB-EC3081-III-2019/EC3081-G02/blob/master/Imagenes/diagrama%20de%20flujo.png)
+[Diagrama](https://github.com/USB-EC3081-III-2019/EC3081-G02/blob/master/docs/Diagrama%20de%20Flujo%20Proyectos_2.pdf)
