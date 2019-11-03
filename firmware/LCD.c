@@ -153,7 +153,6 @@ void __interrupt () my_isr_routine (void) {
             if ((PORTBbits.RB7 == 0)&&(PORTBbits.RB2 == 0))//Código de atención de la interrupción
             {
                 __delay_ms(2);
-                //LCD_Escribir('0');
                 n = '0';
                 k = 0;
                 __delay_ms(50);
@@ -183,9 +182,7 @@ void __interrupt () my_isr_routine (void) {
             }
             if ((PORTBbits.RB6 == 0)&&(PORTBbits.RB1 == 0))//Código de atención de la interrupción
             {
-                //LCD_Comando(0x01); //Display clear
                 __delay_ms(2);
-                //LCD_Escribir('9');
                 n = '9';
                 k = 0;
                 __delay_ms(50);
@@ -193,7 +190,6 @@ void __interrupt () my_isr_routine (void) {
             if ((PORTBbits.RB5 == 0)&&(PORTBbits.RB3 == 0)) //Código de atención de la interrupción
             {
                 __delay_ms(2);
-                //LCD_Escribir('4');
                 n = '4';
                 k = 0;
                 __delay_ms(50);
