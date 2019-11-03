@@ -18,11 +18,11 @@
 
 void LCD_Escribir(char dato);
 
-void LCD_Comando(char dato);
+void LCD_Cmd(char dato);
 
 void LCD_Configuracion_Inicial();
 void PIC_Configuracion_Inicial();
-
+unsigned char n;
 void main() {
     PIC_Configuracion_Inicial();
     LCD_Configuracion_Inicial();
@@ -53,7 +53,7 @@ void LCD_Escribir(char dato){
     __delay_us(40);//función del delay
 }
 
-void LCD_Comando(char dato){
+void LCD_Cmd(char dato){
     LCD_RS = 0;
     LCD_DATO = dato;
     LCD_E = 1;
@@ -67,20 +67,21 @@ void LCD_Comando(char dato){
 void LCD_Configuracion_Inicial(){
     LCD_E = 0;
     __delay_ms(15);
-    LCD_Comando(0x38);
+    LCD_Cmd(0x38);
     __delay_ms(5);
-    LCD_Comando(0x38);
+    LCD_Cmd(0x38);
     __delay_ms(1);
-    LCD_Comando(0x38);
-    LCD_Comando(0x38);
-    LCD_Comando(0x0C);
-    LCD_Comando(0x01);//Display clear
-    LCD_Comando(0x06);//incrementar el cursor
+    LCD_Cmd(0x38);
+    LCD_Cmd(0x38);
+    LCD_Cmd(0x0C);
+    LCD_Cmd(0x01);//Display clear
+    LCD_Cmd(0x06);//incrementar el cursor
     
     
-    LCD_Comando(0x0C);//DISPLAY ON/ CURSOR OFF /NO BLINKING
+    LCD_Cmd(0x0C);//DISPLAY ON/ CURSOR OFF /NO BLINKING
     
 }
+
 void LCD_Escribir_Cadena(char str[]) {
     int i = 0;
     while (str[i] != '\0' && i < 1000) {
@@ -130,6 +131,135 @@ void LCD_Display(int Tam, int Hor) {
             LCD_Cmd(0x1B);
         }
     }
+}
+void __interrupt () my_isr_routine (void) {
+ if(RBIF) //Si hay cambio de estado en PORTB
+ {
+      char a = 1, b = 1, c = 1, i = 0, k = 1;
+        while (k == 1) {
+            PORTBbits.RB3 = a;
+            PORTBbits.RB2 = b;
+            PORTBbits.RB1 = c;
+
+
+            if ((PORTBbits.RB7 == 0)&&(PORTBbits.RB3 == 0)) //Código de atención de la interrupción
+            {
+                __delay_ms(2);
+                n = '*';
+                k = 0;
+                __delay_ms(50);
+
+            }
+            if ((PORTBbits.RB7 == 0)&&(PORTBbits.RB2 == 0))//Código de atención de la interrupción
+            {
+                __delay_ms(2);
+                //LCD_Escribir('0');
+                n = '0';
+                k = 0;
+                __delay_ms(50);
+            }
+            if ((PORTBbits.RB7 == 0)&&(PORTBbits.RB1 == 0))//Código de atención de la interrupción
+            {
+                LCD_Cmd(0x01); //Display clear
+                __delay_ms(2);
+                n = '#';
+                k = 0;
+                __delay_ms(50);
+            }
+            if ((PORTBbits.RB6 == 0)&&(PORTBbits.RB3 == 0)) //Código de atención de la interrupción
+            {
+                __delay_ms(2);
+                n = '7';
+                k = 0;
+                __delay_ms(50);
+
+            }
+            if ((PORTBbits.RB6 == 0)&&(PORTBbits.RB2 == 0))//Código de atención de la interrupción
+            {
+                __delay_ms(2);
+                n = '8';
+                k = 0;
+                __delay_ms(50);
+            }
+            if ((PORTBbits.RB6 == 0)&&(PORTBbits.RB1 == 0))//Código de atención de la interrupción
+            {
+                //LCD_Comando(0x01); //Display clear
+                __delay_ms(2);
+                //LCD_Escribir('9');
+                n = '9';
+                k = 0;
+                __delay_ms(50);
+            }
+            if ((PORTBbits.RB5 == 0)&&(PORTBbits.RB3 == 0)) //Código de atención de la interrupción
+            {
+                __delay_ms(2);
+                //LCD_Escribir('4');
+                n = '4';
+                k = 0;
+                __delay_ms(50);
+            }
+            if ((PORTBbits.RB5 == 0)&&(PORTBbits.RB2 == 0))//Código de atención de la interrupción
+            {   
+                __delay_ms(2);
+                n = '5';
+                k = 0;
+                __delay_ms(50);
+            }
+            if ((PORTBbits.RB5 == 0)&&(PORTBbits.RB1 == 0))//Código de atención de la interrupción
+            {
+                __delay_ms(2);
+                n = '6';
+                k = 0;
+                __delay_ms(50);
+            }
+            if ((PORTBbits.RB4 == 0)&&(PORTBbits.RB3 == 0)) //Código de atención de la interrupción
+            {
+                
+                __delay_ms(2);
+                n = '1';
+                k = 0;
+                __delay_ms(50);
+            }
+            if ((PORTBbits.RB4 == 0)&&(PORTBbits.RB2 == 0))//Código de atención de la interrupción
+            {
+                __delay_ms(2);
+                n = '2';
+                k = 0;
+                __delay_ms(50);
+            }
+            if ((PORTBbits.RB4 == 0)&&(PORTBbits.RB1 == 0))//Código de atención de la interrupción
+            {
+                __delay_ms(2);
+                n = '3';
+                k = 0;
+                __delay_ms(50);
+            }
+
+            if (i == 0) {
+                a = 0;
+                b = 1;
+                c = 1;
+            }
+            if (i == 1) {
+                a = 1;
+                b = 0;
+                c = 1;
+            }
+            if (i == 2) {
+                a = 1;
+                b = 1;
+                c = 0;
+                //i=-1;
+            }
+            if (i == 3) {
+                k = 0;
+                i = -1;
+            }
+            i++;
+        }
+     
+ RBIF = 0; //Desactivar bandera...
+ }
 }
 void PIC_Configuracion_Inicial(){
     TRISD = 0;
