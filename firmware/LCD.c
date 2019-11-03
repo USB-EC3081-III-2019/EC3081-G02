@@ -81,6 +81,56 @@ void LCD_Configuracion_Inicial(){
     LCD_Comando(0x0C);//DISPLAY ON/ CURSOR OFF /NO BLINKING
     
 }
+void LCD_Escribir_Cadena(char str[]) {
+    int i = 0;
+    while (str[i] != '\0' && i < 1000) {
+        LCD_Escribir(str[i]);
+        i++;
+    }
+}
+
+void LCD_Cursor(int h, int v) {
+    int i;
+
+    if (v == 1) {
+        for (i = 0; i < h; i++) {
+            __delay_us(40);
+            LCD_Cmd(0x14);
+        }
+    }
+
+    if (v == 2) {
+        h = h + 40;
+        for (i = 0; i < h; i++) {
+            __delay_us(40);
+            LCD_Cmd(0x14);
+        }
+    }
+
+}
+
+int LCD_Contar(char c[]) {
+    int i = 0;
+    while (c[i] != '\0' && i < 1000) {
+        i++;
+    }
+    return i;
+}
+
+void LCD_Display(int Tam, int Hor) {
+    int aux1, i;
+    __delay_ms(2);
+    LCD_Cmd(0x02);
+
+    __delay_ms(2000);
+    if (Tam > 16 && Tam < 40) {
+        aux1 = Tam - 16;
+        for (i = -1; i < aux1; i++) {
+            __delay_ms(500);
+            LCD_Cmd(0x1B);
+        }
+    }
+}
 void PIC_Configuracion_Inicial(){
     TRISD = 0;
     TRISCbits.TRISC0 = 0;
@@ -89,9 +139,8 @@ void PIC_Configuracion_Inicial(){
     TRISA = 0;
     ADCON0=0b00000000; //Configuracion del registro ADCON0
     
-    
-     /*INICIALIZACIÓN DE INTERRUPCIONES*/
-    INTCON = 0;//limpieza del registro INTCON
-    INTCONbits.GIE = 0;//Habilitacion de interrupciones
-    
+    INTCON = 0; // Limpia Registro INICON
+    INTCONbits.RBIE = 1; //Habilitar interrupciones de puerto B.
+    INTCONbits.RBIF = 0; //Bandera desactivada.
+    INTCONbits.GIE = 1; //Interrupciones globales habilitadas.
 }
