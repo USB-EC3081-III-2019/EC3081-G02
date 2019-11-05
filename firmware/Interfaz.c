@@ -14,47 +14,88 @@
 #define LCD_RS PORTCbits.RC1
 #define LCD_E PORTCbits.RC0
 #define LCD_DATO PORTD
+#define LCD_RD7     PORTDbits.RD7       // D7
+#define TRISRD7     TRISDbits.TRISD7
 
+#define LCD_RD6     PORTDbits.RD6       // D6
+#define TRISRD6     TRISDbits.TRISD6
+
+#define LCD_RD5     PORTDbits.RD5       // D5
+#define TRISRD5     TRISDbits.TRISD5
+
+#define LCD_RD4     PORTDbits.RD4       // D4
+#define TRISRD4     TRISDbits.TRISD4
+
+#define LCD_EN      PORTBbits.RB3       // EN
+#define TRISEN      TRISBbits.TRISB3
 
 void LCD_Escribir(char dato);
+void LCD_Escribir_Cadena(char str[]);
 void Retardo_2segundos();
+void Lcd_Out(unsigned char y, unsigned char x, const char *buffer);
 void LCD_Cmd(char dato);
 void Intro();
 void Visualisar_Config();
 void Temperatura_Humedad();
 void Humedad();
 void Temperatura();
+void Luz_Natural();
 void Luz_Na_Ar();
 void Luz_02_Artificial();
 void Luz_03_Artificial_Manual();
 void Luz_03_Artificial_Automatica();
 void AbrirPercianas();
+void Lcd_Chr_CP(char data);
 void Presencia();
 void LCD_Configuracion_Inicial();
 void PIC_Configuracion_Inicial();
 unsigned char n;
+unsigned int Status,Variable,j,l,g;
 void main() {
     PIC_Configuracion_Inicial();
     LCD_Configuracion_Inicial();
+    while(1){
     Intro();
     Retardo_2segundos();
+      LCD_Cmd(0x01);
     Visualisar_Config();
     switch(n){
         case'1':
+            if(j == -1){
+                break;
+            
+            Status = 0;
+            j = Status + n - 1;
             Temperatura_Humedad();
-            switch(n){
-                case'1':
-                    //Temperatura();
+            Retardo_2segundos();
+            switch(j) {
+                    case'1':
+                        Temperatura();
+                        if (n == 10){
+                                j = j-2;
+
+                        }
                     break;
                 case'2':
-                   // Humedad();
+                    Humedad();
+                        if (n == 10){
+                                j = j-2;
+                        }
                     break;
             }
+            }
         case'2':
+            if(l == -1){
+            Status = 0;
+            l = Status + n -1;
             Luz_Na_Ar();
-            switch(n){
+            switch(l){
                 case'1':
-                    
+                    Luz_Natural();
+                    if (n == 10){
+                                l = l-2;
+                        }
+                 
                     break;
                 case'2':
                     switch(n){
@@ -64,21 +105,22 @@ void main() {
                     case'2':
                     Luz_03_Artificial_Manual();
                     break;
-                  
+                 
                     break;
                 }
-                    
+                   
             }
-            
-    
+           
+   
     }
-    
+    }
+    }
     }
 
-    
+   
 
-    
-    
+   
+   
 
 
 
@@ -114,10 +156,10 @@ void LCD_Configuracion_Inicial(){
     LCD_Cmd(0x0C);
     LCD_Cmd(0x01);//Display clear
     LCD_Cmd(0x06);//incrementar el cursor
-    
-    
+   
+   
     LCD_Cmd(0x0C);//DISPLAY ON/ CURSOR OFF /NO BLINKING
-    
+   
 }
 
 void LCD_Escribir_Cadena(char str[]) {
@@ -139,7 +181,7 @@ void LCD_Cursor(int h, int v) {
     }
 
     if (v == 2) {
-        h = h + 40;
+        h = h + 64;
         for (i = 0; i < h; i++) {
             __delay_us(40);
             LCD_Cmd(0x14);
@@ -190,6 +232,7 @@ void LCD_Display(int Tam, int Hor) {
         }
     }
 }
+
 void __interrupt () my_isr_routine (void) {
  if(RBIF) //Si hay cambio de estado en PORTB
  {
@@ -203,7 +246,7 @@ void __interrupt () my_isr_routine (void) {
             if ((PORTBbits.RB7 == 0)&&(PORTBbits.RB3 == 0)) //Código de atención de la interrupción
             {
                 __delay_ms(2);
-                n = '*';
+                n = '11';
                 k = 0;
                 __delay_ms(50);
 
@@ -219,7 +262,7 @@ void __interrupt () my_isr_routine (void) {
             {
                 LCD_Cmd(0x01); //Display clear
                 __delay_ms(2);
-                n = '#';
+                n = '10';
                 k = 0;
                 __delay_ms(50);
             }
@@ -253,7 +296,7 @@ void __interrupt () my_isr_routine (void) {
                 __delay_ms(50);
             }
             if ((PORTBbits.RB5 == 0)&&(PORTBbits.RB2 == 0))//Código de atención de la interrupción
-            {   
+            {  
                 __delay_ms(2);
                 n = '5';
                 k = 0;
@@ -268,7 +311,7 @@ void __interrupt () my_isr_routine (void) {
             }
             if ((PORTBbits.RB4 == 0)&&(PORTBbits.RB3 == 0)) //Código de atención de la interrupción
             {
-                
+               
                 __delay_ms(2);
                 n = '1';
                 k = 0;
@@ -316,89 +359,106 @@ void __interrupt () my_isr_routine (void) {
  }
 }
 void Intro(){
-    int Horizontal, Vertical, aux2, aux3;
-    Lcd_Set_Cursor(1,1);
-    char aux1[] = "Welcome to";
-    Lcd_Set_Cursor(2,2);
-    char aux0[] = "Smartvite";
+ 
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("Welcome to");
+    LCD_Cursor(0,0);
+    LCD_Cursor(-6,2);
+    LCD_Escribir_Cadena("Smartvite");
 }
 void Visualisar_Config(){
-    int Horizontal, Vertical, aux2, aux3;
-    Lcd_Set_Cursor(1,1);
-    char aux1[] = "1.visualizar";
-    Lcd_Set_Cursor(2,2);
-    char aux0[] = "2.configurar";
+    LCD_Cmd(0x01); // Limpiar Display
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("1.visualizar");
+    LCD_Cursor(0,0);
+    LCD_Cursor(-13,2);
+    LCD_Escribir_Cadena("2.configurar");
 }
 void Temperatura_Humedad(){
-    int Horizontal, Vertical, aux2;
-    Lcd_Set_Cursor(1,1);
-    char aux1[] = "1.Temperatura";
-    Lcd_Set_Cursor(2,2);
-    char aux0[] = "2.Humedad";
+     LCD_Cmd(0x01); // Limpiar Display
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("1.Temperatura");
+    LCD_Cursor(-9,2);
+    LCD_Escribir_Cadena("2.Humedad");
 }
 void Luz_Na_Ar(){
-    int Horizontal, Vertical, aux2, aux3;
-    Lcd_Set_Cursor(1,1);
-    char aux1[] = "1.Luz Natural";
-    Lcd_Set_Cursor(2,2);
-    char aux0[] = "2.Luz Artificial";    
+     LCD_Cmd(0x01); // Limpiar Display
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("1.Luz Natural");
+    LCD_Cursor(-16,2);
+    LCD_Escribir_Cadena("2.Luz Artificial");
+   
 }
 void AbrirPercianas(){
-     int Horizontal, Vertical, aux2, aux3;
-    Lcd_Set_Cursor(1,1);
-    char aux1[] = "1.Abrir percianas";
-    Lcd_Set_Cursor(2,2);
-    char aux0[] = "2.cerrar percianas"; 
+    LCD_Cmd(0x01); // Limpiar Display
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("1.Abrir percianas");
+    LCD_Cursor(-18,2);
+    LCD_Escribir_Cadena("2.cerrar percianas");
 
 
 }
 void Presencia(){
-     int Horizontal, Vertical, aux2, aux3;
-    Lcd_Set_Cursor(1,1);
-    char aux1[] = "3.Presencia";
-    Lcd_Set_Cursor(2,2);
-    char aux0[] = "4.Salir";
+    LCD_Cmd(0x01); // Limpiar Display
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("3.Presencia");
+    LCD_Cursor(-7,2);
+    LCD_Escribir_Cadena("4.Salir");
 }
 void Luz_02_Artificial(){
-     int Horizontal, Vertical, aux2, aux3;
-    Lcd_Set_Cursor(1,1);
-    char aux1[] = "1.Automatica";
-    Lcd_Set_Cursor(2,2);
-    char aux0[] = "2.manual";
+    LCD_Cmd(0x01); // Limpiar Display
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("1.Automatica");
+    LCD_Cursor(-8,2);
+    LCD_Escribir_Cadena("2.manual");
 }
 void Luz_03_Artificial_Manual(){
-     int Horizontal, Vertical, aux2, aux3;
-    Lcd_Set_Cursor(1,1);
-    char aux1[] = "Las luces han sido han sido encendidas";
+    LCD_Cmd(0x01); // Limpiar Display
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("Las luces han sido han sido encendidas");
 }
 void Luz_03_Artificial_Automatica(){
-     int Horizontal, Vertical, aux2, aux3;
-    Lcd_Set_Cursor(1,1);
-    char aux1[] = "Las luces han seran encendidas a las 6 pm";
+    LCD_Cmd(0x01); // Limpiar Display
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("Las luces han seran encendidas a las 6 pm");
+}
+void Temperatura(){
+    LCD_Cmd(0x01); // Limpiar Display
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("La Temperatura es:");
+}
+void Humedad(){
+    LCD_Cmd(0x01); // Limpiar Display
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("La Humedad es:");
+
+}
+void Luz_Natural(){
+        LCD_Cmd(0x01); // Limpiar Display
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("1.abrir persianas");
+    LCD_Cursor(-8,2);
+    LCD_Escribir_Cadena("2.cerrar persianas");
 }
 void Retardo_2segundos(){
-    int i =0;
-    while(i < 20 ){
-        __delay_ms(100); 
+    int i;
+    for(i=0; i<20;i++){
+        __delay_ms(100);
     }
 }
 /*void Humedad(){
-    
-
-
+   
 }*/
 /*void Temperatra(){
-
-
 }*/
 void PIC_Configuracion_Inicial(){
     TRISD = 0;
     TRISCbits.TRISC0 = 0;
     TRISCbits.TRISC1 = 0;
-    
+   
     TRISA = 0;
     ADCON0=0b00000000; //Configuracion del registro ADCON0
-    
+   
     INTCON = 0; // Limpia Registro INICON
     INTCONbits.RBIE = 1; //Habilitar interrupciones de puerto B.
     INTCONbits.RBIF = 0; //Bandera desactivada.
