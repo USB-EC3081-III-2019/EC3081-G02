@@ -43,12 +43,8 @@ void main() {
     LCD_Cmd(0x01);
     __delay_ms(2);
 
-    LCD_Cursor(5, 1);
-    LCD_Escribir_STR("Prueba");
-
-    //Lcd_Int(); inicio de la LCD, llamado de la función desde la libreria
-    //Lcd_Cmd(LCD_CURSOR_OFF); ubicacion del cursor llamado de la función cursor desde la libreria
-    //Lcd_Out(1,1,"mensaje"); pintf en la pantalla, llamado de la funcion desde 
+   // LCD_Cursor(5, 1);
+    //LCD_Escribir_STR("Prueba");
 
     //Bucle
     while (1) {
@@ -56,7 +52,7 @@ void main() {
         float valor = ADC_Read(0), aux4;        //Se coloca 0 porque es el canal analogico RA0
         float voltaje = (valor * 5)/1023;//voltajes a lumenes
         int aux1, aux2, aux3;
-        char lumenes1, lumenes2, lumenes;
+        int lumenes1, lumenes2, lumenes;
         valor = voltaje;
         
         //////////////////////////
@@ -65,7 +61,7 @@ void main() {
         aux4 = valor * 10;
         aux3 = aux4 - aux2;
         
-        LCD_Cmd(0x01);//limpia
+       /* LCD_Cmd(0x01);//limpia
         __delay_ms(2);
         LCD_Escribir_STR("V: ");
         LCD_Escribir('0'+aux1);
@@ -75,16 +71,29 @@ void main() {
         __delay_ms(1000);
         LCD_Cmd(0x01);
         __delay_ms(2);
-        
+        */
         lumenes1 = ((78,357*(pow(valor, 6)) - 1310,4*(pow(valor, 5)) + 8587,1*(pow(valor, 4)) - 28006*(pow(valor, 3)) + 48118*(pow(valor, 2))));
         
         lumenes2 = (- 43329*(valor) + 18771);
         
-        lumenes = lumenes1 + lumenes2;
+       lumenes = (lumenes1 + lumenes2);
+       if (lumenes<0)
+       {
+           lumenes = - lumenes;
+       }
         
+        
+       /* LCD_Cmd(0x01);
+        __delay_ms(2);
+        LCD_Escribir_STR('0'+lumenes);*/
+        
+        char var[50];
+        sprintf(var, "Lumenes: %d ",lumenes);
         LCD_Cmd(0x01);
         __delay_ms(2);
-        LCD_Escribir_STR('0'+lumenes);
+        LCD_Escribir_STR(var);
+        __delay_ms(1000);
+        
         
         //lux = (78,357*(pow(valor, 6)) - 1310,4*(pow(valor, 5)) + 8587,1*(pow(valor, 4)) - 28006*(pow(valor, 3)) + 48118*(pow(valor, 2)) - 43329*(pow(valor)) + 18771);
         //lux = fabs(78,357*(valor)^6 - 1310,4*(valor)^5 + 8587,1*(valor)^4 - 28006*(valor)^3 + 48118*(valor)^2 - 43329*(valor) + 18771);
@@ -108,3 +117,5 @@ unsigned int ADC_Read(unsigned char canal) {
     return (X);
 
 }
+
+
