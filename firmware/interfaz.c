@@ -25,6 +25,9 @@ void LCD_Display(int Tam);
 int LCD_Contar(char c[]);
 void ClosePersianas();
 void Intro();
+void Delay_2s();
+void AperturaDepercians();
+void Timer0Delay(void);
 void Retardo_2segundos();
 void Visualisar_Config();
 void Temperatura_Humedad();
@@ -38,15 +41,19 @@ void Luz_02_Artificial();
 void Luz_03_Artificial_Manual();
 void Luz_03_Artificial_Automatica();
 void AbrirPercianas();
+void AperturaHig();
+void Aperturamedia();
+void Aperturalow();
 unsigned char n;
 unsigned int Status,Variable,j,l,g;
 unsigned char n = ' ';
 unsigned int a = 0, Q = 0;
-unsigned char selector1,selector2,selector3;
+unsigned char selector1,selector2,selector3,selector4,selector5;
 
 void main(void) {
     char aux0[] = "0";
     int selector1 = 0;
+    a = 0;
 
     PIC_Configuracion_Inicial();
     LCD_Configuracion_Inicial();
@@ -59,15 +66,22 @@ void main(void) {
     Retardo_2segundos();
     while(1){
     switch(n){
+        if((n == '1')&&(a == 0)){
+           n = '1'; 
+        }
+        if((n == '2')&&( a == 0)){
+            n = '2';
+        }
         case '1':
              n = ' ';
+             a = 1;
             Temperatura_Humedad(); 
             Retardo_2segundos();
-            if(n == '1'){
+            if((n == '1')&&(a == 1)){
             selector1 = '1';
             n = ' ';
             }
-            if(n == '2'){
+            if((n == '2')&&(a == 1)){
             selector1 = '2';
             n = ' ';
             }
@@ -76,12 +90,13 @@ void main(void) {
                 case '1':
                     selector1 = ' ';
                     Temperatura();
-                    Retardo_2segundos();
+                    Delay_2s();
+                    a = 0;
                     break;
                 case '2':
                     selector1 = ' ';
                     Humedad();
-                    
+                    a = 0;
                     break;
                     
                 case ' ':
@@ -96,41 +111,89 @@ void main(void) {
              selector2 = '0';
              
             Luz_Na_Ar();
-            Retardo_1segundos();
-            
             Retardo_2segundos();
             if(n == '1'){
             selector2 = 'a';
             n = ' ';
+            a = 2;
             }
             if(n == '2'){
             selector2 = 'b';
             n = ' ';
+            a = 2;
             }
             if(n == '3'){
             selector2 = 'c';
             n = ' ';
+            a = 2;
             }
             if(n == '4'){
             selector2 = 'd';
             n = ' ';
+            a = 2;
             }
             
             switch(selector2){
                 case 'a':
-                    selector2 = ' ';
+                    selector2 = 'z';
                     Luz_Natural();
                     Retardo_1segundos();
-                    if(n =='1'){
+                    if((n =='1')&&(selector2 == 'z')){
                         selector3 = '1';
                     }
-                    if(n == '2'){
+                    if((n == '2')&&(selector2 == 'z')){
                         selector3 = '2';
                     }
                     switch(selector3){
                         case '1':
-                            Luz_03_Artificial_Manual();
+                            selector3 = 'o';
+                            AbrirPercianas();
                             Retardo_1segundos();
+                            
+                            if((n == '1')&&(selector3 == 'o')){
+                                selector4 = '1';
+                            }
+                            if((n == '1')&&(selector3 == 'o')){
+                                selector4 = '2';
+                            }
+                            switch(selector4){
+                                case '1':
+                                    a = 4;
+                                    if((n == '1' )&&(a==4)){
+                                        selector5 = '1';
+                                    }
+                                    if((n == '2' )&&(a==4)){
+                                        selector5 = '2';
+                                    }
+                                    if((n == '3' )&&(a==4)){
+                                        selector5 = '3';
+                                    }
+                                    
+                                    OpenPersianas();
+                                    switch(selector5){
+                                        case '1':
+                                             Aperturalow();
+                                             Retardo_1segundos();
+                                            break;
+                                        case '2':
+                                            Aperturamedia();
+                                            Retardo_1segundos();
+                                            
+                                            break;
+                                        case '3':
+                                            AperturaHig();
+                                            Retardo_1segundos(); 
+                                            break;
+                                            
+                                    
+                                    
+                                    }
+                                    break;
+                                case '2':
+                                    ClosePersianas();
+                                    break;
+                            
+                            }
                             
                             break;
                         case '2':
@@ -461,17 +524,15 @@ void Luz_Na_Ar(){
      LCD_Cmd(0x01); // Limpiar Display
     LCD_Cursor(1,1);
     LCD_Escribir_Cadena("1.Luz Natural");
-    LCD_Cursor(-16,2);
+    LCD_Cursor(-14,2);
     LCD_Escribir_Cadena("2.Luz Artificial");
    
 }
 void AbrirPercianas(){
     LCD_Cmd(0x01); // Limpiar Display
-    LCD_Cursor(1,1);
-    LCD_Escribir_Cadena("1.Abrir percianas");
-    LCD_Cursor(-18,2);
-    LCD_Escribir_Cadena("2.cerrar percianas");
-
+    LCD_Escribir_Cadena("1.OPEN");
+    LCD_Cursor(-15,2);
+    LCD_Escribir_Cadena("2.CLOSE");
 
 }
 void Presencia(){
@@ -498,13 +559,15 @@ void Luz_03_Artificial_Manual(){
 void Luz_03_Artificial_Automatica(){
     LCD_Cmd(0x01); // Limpiar Display
     LCD_Cursor(1,1);
-    LCD_Escribir_Cadena("Las luces han seran encendidas a las 6 pm");
+    LCD_Escribir_Cadena("Las luces seran ");
+     LCD_Cursor(-19,2);
+    LCD_Escribir_Cadena("encendidas a las 6 pm");
 }
 void Temperatura(){
     LCD_Cmd(0x01); // Limpiar Display
     LCD_Cursor(1,1);
     LCD_Escribir_Cadena("La Temperatura ");
-    LCD_Cursor(-14,2);
+    LCD_Cursor(-12,2);
     LCD_Escribir_Cadena("26 C");
 }
 void Humedad(){
@@ -517,10 +580,10 @@ void Humedad(){
 }
 void Luz_Natural(){
     LCD_Cmd(0x01); // Limpiar Display
-    LCD_Cursor(1,1);
-    LCD_Escribir_Cadena("1.abrir persianas");
-    LCD_Cursor(-14,2);
-    LCD_Escribir_Cadena("2.cerrar persianas");
+    LCD_Cursor(0,1);
+    LCD_Escribir_Cadena("1.abrir");
+    LCD_Cursor(-7,2);
+    LCD_Escribir_Cadena("2.cerrar");
 }
 void Presencia_salir(){
 LCD_Cmd(0x01); // Limpiar Display
@@ -545,10 +608,60 @@ void Retardo_1segundos(){
 void ClosePersianas(){
     LCD_Cmd(0x01); // Limpiar Display
     LCD_Cursor(1,1);
-    LCD_Escribir_Cadena("Las percianas han sido cerradas");
+    LCD_Escribir_Cadena("Las percianas han");
+    LCD_Cursor(-13,2);
+    LCD_Escribir_Cadena("sido cerradas");
 }
 void OpenPersianas(){
     LCD_Cmd(0x01); // Limpiar Display
     LCD_Cursor(1,1);
-    LCD_Escribir_Cadena("Las percianas han sido abiertas");
+    LCD_Escribir_Cadena("Las percianas han");
+    LCD_Cursor(-13,2);
+    LCD_Escribir_Cadena("sido abiertas");
+}
+void AperturaDepercians(){
+
+
+}
+void Delay_2s(){
+    int i;
+    for(i = 0; i < 200; i++){//Toggle Output
+        if(n != 0){
+            i=200; //Delay
+        }       
+    }
+
+
+}
+void Aperturalow(){
+       LCD_Cmd(0x01); // Limpiar Display
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("Las apertura es de ");
+    LCD_Cursor(-13,2);
+    LCD_Escribir_Cadena("23");
+}
+void Aperturamedia(){
+       LCD_Cmd(0x01); // Limpiar Display
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("Las apertura es de ");
+    LCD_Cursor(-13,2);
+    LCD_Escribir_Cadena("56");
+}
+void AperturaHig(){
+       LCD_Cmd(0x01); // Limpiar Display
+    LCD_Cursor(1,1);
+    LCD_Escribir_Cadena("Las apertura es de ");
+    LCD_Cursor(-13,2);
+    LCD_Escribir_Cadena("76");
+}
+void Timer0Delay(void){     //10ms delay
+    T1CON=0x01;             //Timer-1 16-bit mode Prescaler 1:4
+    TMR1H=0x30;             //Count Hight Byte
+    TMR1L=0xD4;             //Count Low Byte
+   
+    T1CONbits.TMR1ON=1;              //Run timer
+    while(INTCONbits.TMR0IF==0);     //Wait for flag to over flow
+    T1CONbits.TMR1ON=0;              //Switch off timer
+    INTCONbits.TMR0IF=0;             //Clear Interrupt
+   
 }
